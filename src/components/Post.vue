@@ -2,12 +2,8 @@
 <div>
   <h2>{{title}}</h2>
   <ul>
-    <li>
-      <div>Lorem ipsum dolor sit amet, consectetur.</div>
-      <div>At culpa deleniti deserunt facilis sit.</div>
-      <div>Adipisci aperiam consequatur non vitae voluptatibus.</div>
-      <div>Animi expedita natus obcaecati perferendis sed.</div>
-      <div>Ad distinctio est facilis ipsum iure?</div>
+    <li v-for="post in posts" :key="post">
+      {{post}}
     </li>
   </ul>
 
@@ -19,7 +15,26 @@ export default {
   name: 'Post',
   props: {
     title: String
+  },
+  data(){
+    return {
+      posts: [
+
+          {
+            "post_title": "Third Post",
+            "pub_date": "2020-07-10T14:30:00Z",
+            "post_content": "This is the Third post",
+            "is_published": true
+          },
+          {
+            "post_title": "First Post",
+            "pub_date": "2020-07-10T13:30:00Z",
+            "post_content": "This is the first post",
+            "is_published": true
+          }
+    ]
   }
+  },
 }
 </script>
 
