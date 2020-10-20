@@ -2,8 +2,8 @@
 <div>
   <h2>{{title}}</h2>
   <ul>
-    <li v-for="post in posts" :key="post">
-      {{post}}
+    <li v-for="post in posts" :key="post.id">
+      {{post.post_title}}
     </li>
   </ul>
 
@@ -11,30 +11,41 @@
 </template>
 
 <script>
+/* eslint-disable */
+import axios from 'axios'
 export default {
   name: 'Post',
   props: {
     title: String
   },
-  data(){
+  data() {
     return {
-      posts: [
-
-          {
-            "post_title": "Third Post",
-            "pub_date": "2020-07-10T14:30:00Z",
-            "post_content": "This is the Third post",
-            "is_published": true
-          },
-          {
-            "post_title": "First Post",
-            "pub_date": "2020-07-10T13:30:00Z",
-            "post_content": "This is the first post",
-            "is_published": true
-          }
-    ]
-  }
+      posts: []
+    }
   },
+  created() {
+    //fetch data from api or data souce
+    console.log('Fetching Data ..')
+    let configs = {
+      responseType: 'json'
+    }
+    axios.get('http://127.0.0.1:8000/blogs/post/', configs)
+        .then(response=>{
+          // save response data
+          let server_data = response.data
+          let status_code=response.status
+          this.posts=server_data
+          console.log('response has arrived' )
+          console.log(server_data)
+          console.log(status_code)
+        })
+    .catch(error => {
+      // print error
+      console.log('error happened')
+    })
+    console.log('Done Fetching')
+
+  }
 }
 </script>
 
