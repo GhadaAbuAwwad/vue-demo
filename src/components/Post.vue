@@ -1,6 +1,7 @@
 <template>
 <div>
   <h2>{{title}}</h2>
+  <h1 class="error">{{error_msg}}</h1>
   <ul>
     <li v-for="post in posts" :key="post.id">
       {{post.post_title}}
@@ -20,7 +21,8 @@ export default {
   },
   data() {
     return {
-      posts: []
+      posts: [] ,
+      error_msg: ''
     }
   },
   created() {
@@ -41,6 +43,7 @@ export default {
         })
     .catch(error => {
       // print error
+      this.error_msg="please call Areeb"
       console.log('error happened')
     })
     console.log('Done Fetching')
@@ -65,4 +68,10 @@ li {
 a {
   color: #42b983;
 }
+
+.error
+{
+  color:red;
+}
+
 </style>
