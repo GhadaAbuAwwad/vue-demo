@@ -7,7 +7,7 @@
       {{post.post_title}}
     </li>
   </ul>
-
+<h1 v-if="!loaded">Loading...</h1>
 </div>
 </template>
 
@@ -22,7 +22,8 @@ export default {
   data() {
     return {
       posts: [] ,
-      error_msg: ''
+      error_msg: '',
+      loaded: false,
     }
   },
   created() {
@@ -40,11 +41,13 @@ export default {
           console.log('response has arrived' )
           console.log(server_data)
           console.log(status_code)
-        })
+          this.loaded =true}
+       )
     .catch(error => {
       // print error
       this.error_msg="please call Areeb"
       console.log('error happened')
+      this.loaded=true
     })
     console.log('Done Fetching')
 
